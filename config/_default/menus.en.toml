@@ -18,25 +18,25 @@ weight = 3
 [[main]]
 parent = "Services"
 name = "IAM Strategy & Architecture"
-url = "/about"
+url = "/services/strategy-architecture"
 weight = 1
 
 [[main]]
 parent = "Services"
 name = "Implementation & Integration"
-url = "/about"
+url = "/services/implementation-integration"
 weight = 2
 
 [[main]]
 parent = "Services"
 name = "Security & Compliance"
-url = "/about"
+url = "/services/security-compliance"
 weight = 3
 
 [[main]]
 parent = "Services"
 name = "Managed IAM Services"
-url = "/about"
+url = "/services/managed-services"
 weight = 4
 
 [[main]]
@@ -72,7 +72,7 @@ weight = 1
 
 [[footer]]
 name = "Services"
-url = "/about"
+url = "/services"
 weight = 2
 
 [[footer]]

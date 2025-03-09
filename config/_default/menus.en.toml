@@ -12,38 +12,56 @@ url = "/about"
 weight = 2
 
 [[main]]
-name = "Elements"
-url = "/elements"
+name = "Services"
 weight = 3
 
 [[main]]
-weight = 4
-name = "Pages"
+parent = "Services"
+name = "IAM Strategy & Architecture"
+url = "/about"
+weight = 1
 
 [[main]]
-parent = "Pages"
+parent = "Services"
+name = "Implementation & Integration"
+url = "/about"
+weight = 2
+
+[[main]]
+parent = "Services"
+name = "Security & Compliance"
+url = "/about"
+weight = 3
+
+[[main]]
+parent = "Services"
+name = "Managed IAM Services"
+url = "/about"
+weight = 4
+
+[[main]]
+name = "Resources"
+weight = 4
+
+[[main]]
+parent = "Resources"
 name = "Blog"
 url = "/blog"
 
 [[main]]
-parent = "Pages"
-name = "Contact"
-url = "/contact"
+parent = "Resources"
+name = "Case Studies"
+url = "/blog"
 
 [[main]]
-parent = "Pages"
-name = "Authors"
+parent = "Resources"
+name = "IAM Experts"
 url = "/authors"
 
 [[main]]
-parent = "Pages"
-name = "Categories"
-url = "/categories"
-
-[[main]]
-parent = "Pages"
-name = "404 Page"
-url = "/404"
+name = "Contact"
+url = "/contact"
+weight = 5
 
 
 # footer menu
@@ -53,11 +71,21 @@ url = "/about"
 weight = 1
 
 [[footer]]
-name = "Elements"
-url = "/elements"
+name = "Services"
+url = "/about"
 weight = 2
+
+[[footer]]
+name = "Blog"
+url = "/blog"
+weight = 3
+
+[[footer]]
+name = "Contact"
+url = "/contact"
+weight = 4
 
 [[footer]]
 name = "Privacy Policy"
 url = "/privacy-policy"
-weight = 3
+weight = 5

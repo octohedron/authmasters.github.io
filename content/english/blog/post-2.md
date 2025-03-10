@@ -3,7 +3,7 @@ title: "OAuth 2.0 vs OAuth 2.1: What Enterprise Architects Need to Know"
 meta_title: "OAuth 2.0 vs OAuth 2.1 Comparison for Enterprise Architects"
 description: "A comprehensive comparison of OAuth 2.0 and OAuth 2.1 protocols, highlighting key security improvements and migration considerations for enterprise environments."
 date: 2023-10-22T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/oauth-2.1-0.png"
 categories: ["Protocols", "Security Standards"]
 author: "Gustavo Rodríguez"
 tags: ["OAuth", "security", "authentication"]

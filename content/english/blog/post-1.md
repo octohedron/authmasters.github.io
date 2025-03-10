@@ -3,7 +3,7 @@ title: "Implementing Zero Trust Architecture with Modern IAM Solutions"
 meta_title: "Zero Trust Implementation Guide for Enterprises"
 description: "Learn how to implement a comprehensive Zero Trust security architecture using modern identity and access management solutions."
 date: 2023-09-15T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/zero-trust-security-0.jpeg"
 categories: ["Security Architecture", "Zero Trust"]
 author: "Gustavo Rodríguez"
 tags: ["zero trust", "IAM", "security"]

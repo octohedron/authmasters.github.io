@@ -3,7 +3,7 @@ title: "Keycloak vs. Auth0: Enterprise IAM Platform Comparison"
 meta_title: "Keycloak vs. Auth0: Choosing the Right IAM Platform for Enterprise"
 description: "A detailed comparison of Keycloak and Auth0 for enterprise identity and access management, covering features, scalability, deployment options, and total cost of ownership."
 date: 2023-11-18T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/keycloak-vs-auth0-0.png"
 categories: ["IAM Platforms", "Technology Comparison"]
 author: "Gustavo Rodríguez"
 tags: ["Keycloak", "Auth0", "IAM", "enterprise"]

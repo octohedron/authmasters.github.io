@@ -3,7 +3,7 @@ title: "GDPR and DORA Compliance for IAM Systems: A Technical Guide"
 meta_title: "GDPR and DORA Compliance for IAM Systems"
 description: "A comprehensive technical guide to ensuring your identity and access management systems comply with GDPR and DORA regulations in the European Union."
 date: 2024-01-05T05:00:00Z
-image: "/images/image-placeholder.png"
+image: "/images/gdpr-dora-0.png"
 categories: ["Compliance", "Regulations"]
 author: "Gustavo Rodríguez"
 tags: ["GDPR", "DORA", "compliance", "EU regulations"]

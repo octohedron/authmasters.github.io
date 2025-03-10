@@ -1,8 +1,8 @@
 ---
 title: Gustavo Rodríguez
 email: gustavo.rodriguez@authmasters.com
-image: "/images/avatar.png"
-description: "Identity and Access Management Expert at AuthMasters"
+image: "/images/portrait-gus.png"
+description: "Founder and CEO of AuthMasters"
 social:
   - name: github
     icon: fa-brands fa-github
@@ -17,4 +17,4 @@ social:
     link: https://linkedin.com/in/gstrod
 ---
 
-Gustavo Rodríguez is an Identity and Access Management expert at AuthMasters with extensive experience in enterprise security architecture. He specializes in designing and implementing secure authentication and authorization solutions for organizations across various industries.
+Gustavo Rodríguez is the founder and CEO of AuthMasters, with over 20 years of experience in enterprise security architecture and identity solutions. As the technical visionary behind the company, he leads the development of innovative IAM strategies and solutions for Fortune 500 clients. Gustavo is a recognized thought leader in the identity space, having contributed to industry standards and spoken at major security conferences worldwide.

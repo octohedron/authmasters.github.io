@@ -12,7 +12,8 @@
           </div>
           
           <form id="contact-form" method="POST">
-            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <!-- reCAPTCHA disabled until domain is added -->
+            <!-- <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> -->
             <div class="mb-6">
               <label for="first_name" class="form-label">
                 First Name <span class="text-red-500">*</span>
@@ -167,8 +168,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places&callback=initMap" async defer></script>
   {{ end }}
   
-  <!-- reCAPTCHA v3 -->
-  <script src="https://www.google.com/recaptcha/api.js?render=6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X"></script>
+  <!-- reCAPTCHA v3 - disabled until domain is added -->
+  <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X"></script> -->
   
   <script>
     function initMap() {
@@ -183,11 +184,12 @@
       });
     }
 
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', {action: 'submit'}).then(function(token) {
-        document.getElementById('g-recaptcha-response').value = token;
-      });
-    });
+    // reCAPTCHA disabled until domain is added
+    // grecaptcha.ready(function() {
+    //   grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', {action: 'submit'}).then(function(token) {
+    //     document.getElementById('g-recaptcha-response').value = token;
+    //   });
+    // });
 
     function showPopup(message, isSuccess = true) {
       const popup = document.getElementById('popup');
@@ -233,10 +235,11 @@
 
       showPopup('Sending...', true);
 
-      grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', { action: 'submit' }).then(function(token) {
-        document.getElementById('g-recaptcha-response').value = token;
-
-        const form = document.getElementById('contact-form');
+      // reCAPTCHA disabled until domain is added
+      // grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', { action: 'submit' }).then(function(token) {
+      //   document.getElementById('g-recaptcha-response').value = token;
+        
+      const form = document.getElementById('contact-form');
         const formData = new FormData(form);
 
         // Prepare data for Chatwoot API
@@ -316,7 +319,7 @@
         }).catch(error => {
           console.error('Form submission error:', error);
           showPopup(`Error: ${error.message || 'There was an error sending your message.'}`, false);
-        });
+        // });
       });
     });
   </script>

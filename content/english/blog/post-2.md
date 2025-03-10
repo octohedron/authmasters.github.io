@@ -5,7 +5,7 @@ description: "A comprehensive comparison of OAuth 2.0 and OAuth 2.1 protocols, h
 date: 2023-10-22T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["Protocols", "Security Standards"]
-author: "Michael Rodriguez"
+author: "Gustavo Rodríguez"
 tags: ["OAuth", "security", "authentication"]
 draft: false
 ---

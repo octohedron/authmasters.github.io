@@ -5,7 +5,7 @@ description: "A detailed comparison of Keycloak and Auth0 for enterprise identit
 date: 2023-11-18T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["IAM Platforms", "Technology Comparison"]
-author: "Jennifer Blackwell"
+author: "Gustavo Rodríguez"
 tags: ["Keycloak", "Auth0", "IAM", "enterprise"]
 draft: false
 ---

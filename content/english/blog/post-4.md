@@ -5,7 +5,7 @@ description: "A comprehensive technical guide to ensuring your identity and acce
 date: 2024-01-05T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["Compliance", "Regulations"]
-author: "David Takahashi"
+author: "Gustavo Rodríguez"
 tags: ["GDPR", "DORA", "compliance", "EU regulations"]
 draft: false
 ---

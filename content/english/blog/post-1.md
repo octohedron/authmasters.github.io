@@ -5,7 +5,7 @@ description: "Learn how to implement a comprehensive Zero Trust security archite
 date: 2023-09-15T05:00:00Z
 image: "/images/image-placeholder.png"
 categories: ["Security Architecture", "Zero Trust"]
-author: "Sarah Chen"
+author: "Gustavo Rodríguez"
 tags: ["zero trust", "IAM", "security"]
 draft: false
 ---

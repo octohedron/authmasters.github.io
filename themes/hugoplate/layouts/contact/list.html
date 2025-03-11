@@ -1,327 +1,267 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
+{{ partial "page-header" . }}
 
 
-  <section class="section-sm">
-    <div class="container">
-      <div class="row">
-        <div class="md:col-10 lg:col-6 mx-auto">
-          <!-- Popup notification -->
-          <div id="popup" class="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4 z-50 hidden">
-            <p id="popupMessage" class="text-green-500"></p>
-          </div>
-          
-          <form id="contact-form" method="POST">
-            <!-- reCAPTCHA disabled until domain is added -->
-            <!-- <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response"> -->
-            <div class="mb-6">
-              <label for="first_name" class="form-label">
-                First Name <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="first_name"
-                name="first_name"
-                class="form-input"
-                placeholder="John"
-                type="text" />
-            </div>
-            <div class="mb-6">
-              <label for="last_name" class="form-label">
-                Last Name <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="last_name"
-                name="last_name"
-                class="form-input"
-                placeholder="Doe"
-                type="text" />
-            </div>
-            <div class="mb-6">
-              <label for="email" class="form-label">
-                Email <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="email"
-                name="email"
-                class="form-input"
-                placeholder="john.doe@email.com"
-                type="email" />
-            </div>
-            <div class="mb-6">
-              <label for="phone" class="form-label">
-                Phone Number
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                class="form-input"
-                placeholder="+1234567890"
-                type="tel" />
-            </div>
-            <div class="mb-6">
-              <label for="company" class="form-label">
-                Company
-              </label>
-              <input
-                id="company"
-                name="company"
-                class="form-input"
-                placeholder="Your Company"
-                type="text" />
-            </div>
-            <div class="mb-6">
-              <label for="subject" class="form-label">
-                Subject <span class="text-red-500">*</span>
-              </label>
-              <input
-                id="subject"
-                name="subject"
-                class="form-input"
-                placeholder="Consultation Request"
-                type="text" />
-            </div>
-            <div class="mb-6">
-              <label for="message" class="form-label">
-                Message <span class="text-red-500">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-input"
-                placeholder="Message goes here..."
-                rows="8"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="md:col-10 lg:col-6 mx-auto">
+        <!-- Popup notification -->
+        <div id="popup" class="fixed top-4 right-4 bg-white shadow-lg rounded-lg p-4 z-50 hidden">
+          <p id="popupMessage" class="text-green-500"></p>
         </div>
+
+        <form id="contact-form" method="POST">
+          <!-- reCAPTCHA disabled until domain is added -->
+          <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+          <div class="mb-6">
+            <label for="first_name" class="form-label">
+              First Name <span class="text-red-500">*</span>
+            </label>
+            <input id="first_name" name="first_name" class="form-input" placeholder="John" type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="last_name" class="form-label">
+              Last Name <span class="text-red-500">*</span>
+            </label>
+            <input id="last_name" name="last_name" class="form-input" placeholder="Doe" type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="email" class="form-label">
+              Email <span class="text-red-500">*</span>
+            </label>
+            <input id="email" name="email" class="form-input" placeholder="john.doe@email.com" type="email" />
+          </div>
+          <div class="mb-6">
+            <label for="phone" class="form-label">
+              Phone Number
+            </label>
+            <input id="phone" name="phone" class="form-input" placeholder="+1234567890" type="tel" />
+          </div>
+          <div class="mb-6">
+            <label for="company" class="form-label">
+              Company
+            </label>
+            <input id="company" name="company" class="form-input" placeholder="Your Company" type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="subject" class="form-label">
+              Subject <span class="text-red-500">*</span>
+            </label>
+            <input id="subject" name="subject" class="form-input" placeholder="Consultation Request" type="text" />
+          </div>
+          <div class="mb-6">
+            <label for="message" class="form-label">
+              Message <span class="text-red-500">*</span>
+            </label>
+            <textarea id="message" name="message" class="form-input" placeholder="Message goes here..."
+              rows="8"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- google map -->
-  {{ with site.Params.google_map }}
-    {{ if .enable }}
-      <div
-        id="map"
-        style="height: 400px;"
-        data-latitude="{{ .map_latitude }}"
-        data-longitude="{{ .map_longitude }}"
-        data-marker="{{ .map_marker | relURL }}"
-        data-marker-name="{{ site.Title }}"></div>
-    {{ end }}
-  {{ end }}
+<!-- google map -->
+{{ with site.Params.google_map }}
+{{ if .enable }}
+<div id="map" style="height: 400px;" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}"
+  data-marker="{{ .map_marker | relURL }}" data-marker-name="{{ site.Title }}"></div>
+{{ end }}
+{{ end }}
 
-  {{ with site.Params.subscription }}
-    {{ if .enable }}
-      <!-- subscription form -->
-      <form
-        action="{{ .mailchimp_form_action | safeURL }}"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        novalidate="novalidate">
-        <div class="input-group w-75 mx-auto mb-3">
-          <input
-            type="email"
-            name="EMAIL"
-            placeholder="Email"
-            class="form-control required email mce_inline_error"
-            id="mce-EMAIL"
-            aria-required="true"
-            autocomplete="off"
-            required />
-          <button
-            class="input-group-text"
-            name="subscribe"
-            id="mc-embedded-subscribe">
-            {{ .button_label }}
-          </button>
-        </div>
-        <input
-          type="hidden"
-          name="EMAILTYPE"
-          id="mce-EMAILTYPE-0"
-          value="html" />
-        <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="{{ .name }}" tabindex="-1" />
-        </div>
-      </form>
-      <div id="mce-responses" class="clear">
-        <div
-          class="response text-white"
-          id="mce-error-response"
-          style="display:none"></div>
-        <div
-          class="response text-white"
-          id="mce-success-response"
-          style="display:none"></div>
-      </div>
-      <script
-        type="text/javascript"
-        src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-      <!-- /subscription form -->
-    {{ end }}
-  {{ end }}
+{{ with site.Params.subscription }}
+{{ if .enable }}
+<!-- subscription form -->
+<form action="{{ .mailchimp_form_action | safeURL }}" method="post" id="mc-embedded-subscribe-form"
+  novalidate="novalidate">
+  <div class="input-group w-75 mx-auto mb-3">
+    <input type="email" name="EMAIL" placeholder="Email" class="form-control required email mce_inline_error"
+      id="mce-EMAIL" aria-required="true" autocomplete="off" required />
+    <button class="input-group-text" name="subscribe" id="mc-embedded-subscribe">
+      {{ .button_label }}
+    </button>
+  </div>
+  <input type="hidden" name="EMAILTYPE" id="mce-EMAILTYPE-0" value="html" />
+  <div style="position:absolute;left:-5000px" aria-hidden="true">
+    <input type="text" name="{{ .name }}" tabindex="-1" />
+  </div>
+</form>
+<div id="mce-responses" class="clear">
+  <div class="response text-white" id="mce-error-response" style="display:none"></div>
+  <div class="response text-white" id="mce-success-response" style="display:none"></div>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<!-- /subscription form -->
+{{ end }}
+{{ end }}
 
-  {{ if site.Params.google_map.enable }}
-    {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
-    <script defer src="{{ $gmap.RelPermalink }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places&callback=initMap" async defer></script>
-  {{ end }}
-  
-  <!-- reCAPTCHA v3 - disabled until domain is added -->
-  <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X"></script> -->
-  
-  <script>
-    function initMap() {
-      const mapOptions = {
-        zoom: 15,
-        center: { lat: 37.4275, lng: -122.1697 }
-      };
-      const map = new google.maps.Map(document.getElementById("map"), mapOptions);
-      const marker = new google.maps.Marker({
-        position: { lat: 37.4275, lng: -122.1697 },
-        map: map,
-      });
+{{ if site.Params.google_map.enable }}
+{{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
+<script defer src="{{ $gmap.RelPermalink }}"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places&callback=initMap"
+  async defer></script>
+{{ end }}
+
+<script>
+  function initMap() {
+    const mapOptions = {
+      zoom: 15,
+      center: { lat: 37.4275, lng: -122.1697 }
+    };
+    const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    const marker = new google.maps.Marker({
+      position: { lat: 37.4275, lng: -122.1697 },
+      map: map,
+    });
+  }
+
+  // reCAPTCHA disabled until domain is added
+  // grecaptcha.ready(function() {
+  //   grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', {action: 'submit'}).then(function(token) {
+  //     document.getElementById('g-recaptcha-response').value = token;
+  //   });
+  // });
+
+  function showPopup(message, isSuccess = true) {
+    const popup = document.getElementById('popup');
+    const popupMessage = document.getElementById('popupMessage');
+    popupMessage.textContent = message;
+    popupMessage.classList.remove('text-red-500', 'text-green-500');
+    popupMessage.classList.add(isSuccess ? 'text-green-500' : 'text-red-500');
+    popup.classList.remove('hidden');
+    setTimeout(() => {
+      popup.classList.add('hidden');
+    }, 3000);
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    // Validate required fields
+    const requiredFields = ['first_name', 'last_name', 'email', 'subject', 'message'];
+    let isValid = true;
+    requiredFields.forEach(function (field) {
+      const input = document.getElementsByName(field)[0];
+      if (!input.value) {
+        isValid = false;
+        input.classList.add('border-red-500');
+        const errorText = document.createElement('span');
+        errorText.classList.add('text-red-500', 'text-sm');
+        errorText.textContent = 'This field is required';
+        if (!input.nextElementSibling) {
+          input.parentNode.appendChild(errorText);
+        }
+      } else {
+        input.classList.remove('border-red-500');
+        if (input.nextElementSibling) {
+          input.parentNode.removeChild(input.nextElementSibling);
+        }
+      }
+    });
+
+    if (!isValid) {
+      showPopup('Please fill out all required fields.', false);
+      return;
     }
+
+    showPopup('Sending...', true);
 
     // reCAPTCHA disabled until domain is added
-    // grecaptcha.ready(function() {
-    //   grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', {action: 'submit'}).then(function(token) {
-    //     document.getElementById('g-recaptcha-response').value = token;
-    //   });
-    // });
+    // grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', { action: 'submit' }).then(function(token) {
+    //   document.getElementById('g-recaptcha-response').value = token;
 
-    function showPopup(message, isSuccess = true) {
-      const popup = document.getElementById('popup');
-      const popupMessage = document.getElementById('popupMessage');
-      popupMessage.textContent = message;
-      popupMessage.classList.remove('text-red-500', 'text-green-500');
-      popupMessage.classList.add(isSuccess ? 'text-green-500' : 'text-red-500');
-      popup.classList.remove('hidden');
-      setTimeout(() => {
-        popup.classList.add('hidden');
-      }, 3000);
-    }
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LczHvEqAAAAAMGzi2wQOhHnyXul6VUrm5eoi3ch', { action: 'LOGIN' });
+      document.getElementById('g-recaptcha-response').value = token;
+    });
 
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
+    const form = document.getElementById('contact-form');
+    const formData = new FormData(form);
 
-      // Validate required fields
-      const requiredFields = ['first_name', 'last_name', 'email', 'subject', 'message'];
-      let isValid = true;
-      requiredFields.forEach(function(field) {
-        const input = document.getElementsByName(field)[0];
-        if (!input.value) {
-          isValid = false;
-          input.classList.add('border-red-500');
-          const errorText = document.createElement('span');
-          errorText.classList.add('text-red-500', 'text-sm');
-          errorText.textContent = 'This field is required';
-          if (!input.nextElementSibling) {
-            input.parentNode.appendChild(errorText);
-          }
-        } else {
-          input.classList.remove('border-red-500');
-          if (input.nextElementSibling) {
-            input.parentNode.removeChild(input.nextElementSibling);
-          }
+    // Prepare data for Chatwoot API
+    const data = {
+      email: formData.get('email'),
+      name: formData.get('first_name') + ' ' + formData.get('last_name'),
+      phone_number: formData.get('phone'),
+      avatar_url: '',  // Add avatar URL if needed
+      custom_attributes: {
+        company: formData.get('company'),
+        subject: formData.get('subject'),
+        message: formData.get('message')
+      }
+    };
+
+    // Perform both fetch requests and wait for their results
+    Promise.all([
+      fetch('https://crm.authmasters.com/public/api/v1/inboxes/mmehNQEHTBK1hnu5PgPPk7hC/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }),
+      fetch('https://email.raise.systems/sendemail', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
         }
-      });
+      })
+    ]).then(async ([crmResponse, emailResponse]) => {
+      let crmSuccess = crmResponse.ok;
+      let emailSuccess = emailResponse.ok;
 
-      if (!isValid) {
-        showPopup('Please fill out all required fields.', false);
-        return;
+      if (!crmSuccess) {
+        let crmError = await crmResponse.json();
+        let errorMessage = 'There was an error sending your message.';
+
+        // Handle specific error messages
+        if (crmError.message) {
+          errorMessage = crmError.message;
+
+          // Format specific error messages to be more user-friendly
+          if (errorMessage.includes('e164 format')) {
+            errorMessage = 'Phone number should be in international format (e.g., +34612345678)';
+          }
+        } else if (crmError.error) {
+          errorMessage = crmError.error;
+        }
+
+        // Display attributes that had errors if available
+        if (crmError.attributes && crmError.attributes.length > 0) {
+          errorMessage += ` (Fields with errors: ${crmError.attributes.join(', ')})`;
+        }
+
+        showPopup(`Error: ${errorMessage}`, false);
       }
 
-      showPopup('Sending...', true);
+      if (!emailSuccess) {
+        try {
+          let emailError = await emailResponse.json();
+          let errorMessage = emailError.message || emailError.error || 'There was an error sending your email.';
+          showPopup(`Email Error: ${errorMessage}`, false);
+        } catch (e) {
+          showPopup('Email Error: There was an error sending your email.', false);
+        }
+      }
 
-      // reCAPTCHA disabled until domain is added
-      // grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', { action: 'submit' }).then(function(token) {
-      //   document.getElementById('g-recaptcha-response').value = token;
-        
-      const form = document.getElementById('contact-form');
-        const formData = new FormData(form);
-
-        // Prepare data for Chatwoot API
-        const data = {
-          email: formData.get('email'),
-          name: formData.get('first_name') + ' ' + formData.get('last_name'),
-          phone_number: formData.get('phone'),
-          avatar_url: '',  // Add avatar URL if needed
-          custom_attributes: {
-            company: formData.get('company'),
-            subject: formData.get('subject'),
-            message: formData.get('message')
-          }
-        };
-
-        // Perform both fetch requests and wait for their results
-        Promise.all([
-          fetch('https://crm.authmasters.com/public/api/v1/inboxes/mmehNQEHTBK1hnu5PgPPk7hC/contacts', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }),
-          fetch('https://email.raise.systems/sendemail', {
-            method: 'POST',
-            body: formData,
-            headers: {
-              'Accept': 'application/json'
-            }
-          })
-        ]).then(async ([crmResponse, emailResponse]) => {
-          let crmSuccess = crmResponse.ok;
-          let emailSuccess = emailResponse.ok;
-
-          if (!crmSuccess) {
-            let crmError = await crmResponse.json();
-            let errorMessage = 'There was an error sending your message.';
-            
-            // Handle specific error messages
-            if (crmError.message) {
-              errorMessage = crmError.message;
-              
-              // Format specific error messages to be more user-friendly
-              if (errorMessage.includes('e164 format')) {
-                errorMessage = 'Phone number should be in international format (e.g., +34612345678)';
-              }
-            } else if (crmError.error) {
-              errorMessage = crmError.error;
-            }
-            
-            // Display attributes that had errors if available
-            if (crmError.attributes && crmError.attributes.length > 0) {
-              errorMessage += ` (Fields with errors: ${crmError.attributes.join(', ')})`;
-            }
-            
-            showPopup(`Error: ${errorMessage}`, false);
-          }
-
-          if (!emailSuccess) {
-            try {
-              let emailError = await emailResponse.json();
-              let errorMessage = emailError.message || emailError.error || 'There was an error sending your email.';
-              showPopup(`Email Error: ${errorMessage}`, false);
-            } catch (e) {
-              showPopup('Email Error: There was an error sending your email.', false);
-            }
-          }
-
-          if (crmSuccess && emailSuccess) {
-            form.reset();
-            const inputs = form.querySelectorAll('input, textarea, button');
-            inputs.forEach(input => input.disabled = true);
-            showPopup('Message sent successfully!', true);
-          }
-        }).catch(error => {
-          console.error('Form submission error:', error);
-          showPopup(`Error: ${error.message || 'There was an error sending your message.'}`, false);
-        // });
-      });
+      if (crmSuccess && emailSuccess) {
+        form.reset();
+        const inputs = form.querySelectorAll('input, textarea, button');
+        inputs.forEach(input => input.disabled = true);
+        showPopup('Message sent successfully!', true);
+      }
+    }).catch(error => {
+      console.error('Form submission error:', error);
+      showPopup(`Error: ${error.message || 'There was an error sending your message.'}`, false);
+      // });
     });
-  </script>
+  });
+</script>
 
 {{ end }}

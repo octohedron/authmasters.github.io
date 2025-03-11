@@ -1,12 +1,7 @@
 <meta charset="utf-8" />
 
 <!-- responsive meta -->
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, maximum-scale=5" />
-
-<!-- theme meta -->
-<meta name="theme-name" content="hugoplate" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
 
 <!-- favicon -->
 {{ partialCached "favicon" . }}
@@ -30,7 +25,7 @@
 
 <!-- google analytics -->
 {{ if and site.Config.Services.GoogleAnalytics.ID (ne site.Config.Services.GoogleAnalytics.ID "G-MEASUREMENT_ID") }}
-  {{ template "_internal/google_analytics.html" . }}
+{{ template "_internal/google_analytics.html" . }}
 {{ end }}
 
 
@@ -59,3 +54,5 @@
 
 <!-- Mermaid -->
 {{ partial "mermaid/assets/js" . }}
+
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6LczHvEqAAAAAMGzi2wQOhHnyXul6VUrm5eoi3ch"></script>

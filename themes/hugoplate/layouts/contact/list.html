@@ -170,96 +170,94 @@
 
     showPopup('Sending...', true);
 
-    // reCAPTCHA disabled until domain is added
-    // grecaptcha.execute('6LfvTB0qAAAAAJKb-ayOnYI_fpA9ukwWIiU1ZL5X', { action: 'submit' }).then(function(token) {
-    //   document.getElementById('g-recaptcha-response').value = token;
+    // Execute reCAPTCHA Enterprise and then submit the form
+    grecaptcha.enterprise.ready(function () {
+      grecaptcha.enterprise.execute('6LczHvEqAAAAAMGzi2wQOhHnyXul6VUrm5eoi3ch', { action: 'submit' })
+        .then(function (token) {
+          document.getElementById('g-recaptcha-response').value = token;
 
-    grecaptcha.enterprise.ready(async () => {
-      const token = await grecaptcha.enterprise.execute('6LczHvEqAAAAAMGzi2wQOhHnyXul6VUrm5eoi3ch', { action: 'LOGIN' });
-      document.getElementById('g-recaptcha-response').value = token;
-    });
+          const form = document.getElementById('contact-form');
+          const formData = new FormData(form);
 
-    const form = document.getElementById('contact-form');
-    const formData = new FormData(form);
+          // Prepare data for Chatwoot API
+          const data = {
+            email: formData.get('email'),
+            name: formData.get('first_name') + ' ' + formData.get('last_name'),
+            phone_number: formData.get('phone'),
+            avatar_url: '',  // Add avatar URL if needed
+            custom_attributes: {
+              company: formData.get('company'),
+              subject: formData.get('subject'),
+              message: formData.get('message')
+            }
+          };
 
-    // Prepare data for Chatwoot API
-    const data = {
-      email: formData.get('email'),
-      name: formData.get('first_name') + ' ' + formData.get('last_name'),
-      phone_number: formData.get('phone'),
-      avatar_url: '',  // Add avatar URL if needed
-      custom_attributes: {
-        company: formData.get('company'),
-        subject: formData.get('subject'),
-        message: formData.get('message')
-      }
-    };
+          // Perform both fetch requests and wait for their results
+          Promise.all([
+            fetch('https://crm.authmasters.com/public/api/v1/inboxes/mmehNQEHTBK1hnu5PgPPk7hC/contacts', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(data)
+            }),
+            fetch('https://email.raise.systems/sendemail', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'Accept': 'application/json'
+              }
+            })
+          ]).then(async ([crmResponse, emailResponse]) => {
+            let crmSuccess = crmResponse.ok;
+            let emailSuccess = emailResponse.ok;
 
-    // Perform both fetch requests and wait for their results
-    Promise.all([
-      fetch('https://crm.authmasters.com/public/api/v1/inboxes/mmehNQEHTBK1hnu5PgPPk7hC/contacts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }),
-      fetch('https://email.raise.systems/sendemail', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-    ]).then(async ([crmResponse, emailResponse]) => {
-      let crmSuccess = crmResponse.ok;
-      let emailSuccess = emailResponse.ok;
+            if (!crmSuccess) {
+              let crmError = await crmResponse.json();
+              let errorMessage = 'There was an error sending your message.';
 
-      if (!crmSuccess) {
-        let crmError = await crmResponse.json();
-        let errorMessage = 'There was an error sending your message.';
+              // Handle specific error messages
+              if (crmError.message) {
+                errorMessage = crmError.message;
 
-        // Handle specific error messages
-        if (crmError.message) {
-          errorMessage = crmError.message;
+                // Format specific error messages to be more user-friendly
+                if (errorMessage.includes('e164 format')) {
+                  errorMessage = 'Phone number should be in international format (e.g., +34612345678)';
+                }
+              } else if (crmError.error) {
+                errorMessage = crmError.error;
+              }
 
-          // Format specific error messages to be more user-friendly
-          if (errorMessage.includes('e164 format')) {
-            errorMessage = 'Phone number should be in international format (e.g., +34612345678)';
-          }
-        } else if (crmError.error) {
-          errorMessage = crmError.error;
-        }
+              // Display attributes that had errors if available
+              if (crmError.attributes && crmError.attributes.length > 0) {
+                errorMessage += ` (Fields with errors: ${crmError.attributes.join(', ')})`;
+              }
 
-        // Display attributes that had errors if available
-        if (crmError.attributes && crmError.attributes.length > 0) {
-          errorMessage += ` (Fields with errors: ${crmError.attributes.join(', ')})`;
-        }
+              showPopup(`Error: ${errorMessage}`, false);
+            }
 
-        showPopup(`Error: ${errorMessage}`, false);
-      }
+            if (!emailSuccess) {
+              try {
+                let emailError = await emailResponse.json();
+                let errorMessage = emailError.message || emailError.error || 'There was an error sending your email.';
+                showPopup(`Email Error: ${errorMessage}`, false);
+              } catch (e) {
+                showPopup('Email Error: There was an error sending your email.', false);
+              }
+            }
 
-      if (!emailSuccess) {
-        try {
-          let emailError = await emailResponse.json();
-          let errorMessage = emailError.message || emailError.error || 'There was an error sending your email.';
-          showPopup(`Email Error: ${errorMessage}`, false);
-        } catch (e) {
-          showPopup('Email Error: There was an error sending your email.', false);
-        }
-      }
-
-      if (crmSuccess && emailSuccess) {
-        form.reset();
-        const inputs = form.querySelectorAll('input, textarea, button');
-        inputs.forEach(input => input.disabled = true);
-        showPopup('Message sent successfully!', true);
-      }
-    }).catch(error => {
-      console.error('Form submission error:', error);
-      showPopup(`Error: ${error.message || 'There was an error sending your message.'}`, false);
-      // });
+            if (crmSuccess && emailSuccess) {
+              form.reset();
+              const inputs = form.querySelectorAll('input, textarea, button');
+              inputs.forEach(input => input.disabled = true);
+              showPopup('Message sent successfully!', true);
+            }
+          }).catch(error => {
+            console.error('Form submission error:', error);
+            showPopup(`Error: ${error.message || 'There was an error sending your message.'}`, false);
+          });
+        });
     });
   });
 </script>
